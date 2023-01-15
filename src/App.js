@@ -5,6 +5,8 @@ import Home from './Pages/Home/Home';
 import { Routes,Route } from 'react-router-dom';
 import CheckOutPage from './Pages/CheckOutPage/CheckOutPage';
 import Category from './Pages/Category/Category';
+import SignInPage from './Pages/SignInPage/SignInPage';
+import Order from './Pages/Order/Order';
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/checkout' element={<CheckOutPage/>}/>
-        <Route path='category/:categoryId' element={<Category/>}/>  
+        <Route path='category/:categoryId' element={<Category/>}/>
+        <Route path='/signin' element={<SignInPage/>} />
+        <Route path='/order' element={<Order/>} />
       </Routes>
     </div>
   );
