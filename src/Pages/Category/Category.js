@@ -12,7 +12,7 @@ const Category = () => {
     <div className='flex flex-col justify-center items-center'>
         <p className='text-2xl my-6'>{categoryId.toUpperCase()}</p>
         <div className='h-[2px] w-10/12 bg-gray-300  mb-6'/>
-        <div className=' grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row-dense '>
+        <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row-dense '>
         {
             data && data.length>0?(
                 data.map(product=><ProductCard key={product.id} product={product}/>)

@@ -14,7 +14,7 @@ const Home = () => {
             <Banner/>
             <div  className = 'absolute h-[250px] w-full  bottom-0 bg-gradient-to-t from-gray-100 to-transparent' / >
 
-            <div className='absolute top-52 z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row-dense m-2 bg-gradient-to-t from-gray-100 to-transparent'>
+            <div className='absolute top-52 z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row-dense m-2 bg-gradient-to-t from-gray-100 to-transparent'>
                 {data && data.map(product=>(
                     <ProductCard key={product.id} product={product}/>
                 ))}

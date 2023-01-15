@@ -4,7 +4,8 @@ import CheckOutCard from '../../Components/CheckoutCard/CheckOutCard';
 import { cartItems,totalAmount } from '../../features/bucketSlice/bucketSelector';
 
 const CheckOutPage = () => {
-    const items = useSelector(cartItems)
+    const items = useSelector(cartItems);
+    const total =useSelector(totalAmount)
     console.log(items)
     return (
     <div className='sm:grid sm:grid-cols-4  bg-gray-100'>
@@ -25,7 +26,7 @@ const CheckOutPage = () => {
             {items.length>0?(
                 <div>
                     <p>Total Amount</p>
-                    <p>{totalAmount}</p>
+                    <p>{total}</p>
                 </div>
             ):(<p className='text-center'>Bucket is empty</p>)}
         </div>

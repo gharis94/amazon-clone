@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <div className='w-full '>
         {/* Header Top */}
-        <div className='h-10 flex sm:flex-grow bg-amazonblue-dark space-x-2 px-2 items-center'>
+        <div className='h-10 flex justify-between sm:flex-grow  bg-amazonblue-dark space-x-2 px-2 items-center'>
         {/* {Left side of Header} */}
             <div>
                 <div onClick={()=>navigateTo('/')} className='cursor-pointer'>
@@ -28,7 +28,7 @@ const Header = () => {
                 </div>
             </div>
             {/* Header Center */}
-            <div className='bg-yellow-400 my-2 flex flex-grow items-center rounded-lg'>
+            <div className='bg-yellow-400 my-2 sm:flex sm:flex-grow hidden items-center rounded-lg'>
                 <input className='flex-grow focus:outline-none focus:border-none px-2 rounded-l-lg' placeholder='Search..'/>
                 <FiSearch className='text-white'/>
             </div>
@@ -51,11 +51,14 @@ const Header = () => {
         {/* Header Bottom */}
         <div className='h-6 flex bg-amazonblue-light items-center p-1 text-white space-x-2'>
             <AiOutlineMenu/>
-            {
+            <div className='hidden sm:flex'>
+                {
                 data && data.map(category=>(
                     <p onClick={()=>handleNavigate(category)} className='text-sm cursor-pointer' key={category}>{category.toUpperCase()}</p>
                 ))
             }
+            </div>
+            
             
         </div>
     </div>
