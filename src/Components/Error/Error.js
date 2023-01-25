@@ -2,8 +2,8 @@ import React from 'react'
 
 const Error = () => {
   return (
-    <div className='flex justify-center items-center'>
-        <h2>Error loading the page...</h2>
+    <div className='flex justify-center items-center h-screen'>
+        <p className='font-semibold text-lg'>Error loading the page...</p>
     </div>
   )
 }

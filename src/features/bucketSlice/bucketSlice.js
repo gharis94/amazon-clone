@@ -1,4 +1,4 @@
-import { createSlice,current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
     cart:[]
@@ -24,7 +24,7 @@ export const bucketSlice = createSlice({
         },
         removeFromCart:(state,action)=>{
             //console.log(action.payload)
-            const found = [...state.cart].find(({id})=>(id==action.payload.id && action.payload.quantity>1))
+            const found = [...state.cart].find(({id})=>(id===action.payload.id && action.payload.quantity>1))
             if(found){
                 state.cart=state.cart.map(product=>product.id ===action.payload.id?({...product,quantity:product.quantity-1}):(product))
             }else{

@@ -17,13 +17,13 @@ const Banner = () => {
 
         >
             
-            <img height={10} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ9Vo4hVJQJo8l3yh9-pvJIzPYEi_EgYHWQ3A0TlI0Ml3Dxn0wDVWfWoFSqzXiS7d6lB4&usqp=CAU'/>
+            <img className='h-1/2 object-cover' alt='banner' src='https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'/>
             
             
-            <img height={8} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAVZGRXub01l-ihb7ocHlaTjubW9nrZWYO5vrV1BCCjDRGNr61KWBvYHKmgqqAJBuvxSE&usqp=CAU'/>
+            <img className='h-1/2 object-cover' alt='banner' src='https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1009&q=80'/>
             
             
-            <img height={5} src='https://d1csarkz8obe9u.cloudfront.net/posterpreviews/fashion-men-design-template-2818871e3db2e116f1c47037d302d082_screen.jpg?ts=1611165853'/>
+            <img className='h-1/2 object-cover' alt='banner' src='https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=879&q=80'/>
             
         </Carousel>
     
