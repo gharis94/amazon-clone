@@ -1,26 +1,35 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {ReactComponent as Logo} from '../../assets/amazon.svg';
 import {FiSearch} from 'react-icons/fi'
 import {AiOutlineShoppingCart} from 'react-icons/ai'
 import {AiOutlineMenu} from 'react-icons/ai'
 import { useGetCategoryQuery } from '../../features/dataApi'
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { quantitySelector } from '../../features/bucketSlice/bucketSelector';
 import { useNavigate } from 'react-router-dom';
 import { userSelector } from '../../features/user/userSelector';
-
+import { useDebounce } from '../../hooks/useDebounce/useDebounce';
+import { setToSearch } from '../../features/search/searchSlice';
+import {RxCross2} from 'react-icons/rx'
 
 const Header = () => {
     const {data} = useGetCategoryQuery();
     const cartCount =useSelector(quantitySelector);
     const navigateTo=useNavigate();
     const user = useSelector(userSelector);
-
+    const [inputSearch,setInputSearch] = useState('');
+    const debounceValue = useDebounce(inputSearch,500);
+    const dispatch = useDispatch();
+    const [isOpen,setIsOpen]=useState(false)
     const handleNavigate=(e)=>{        
         navigateTo(`/category/${e}`)
     }
+    useEffect(()=>{
+        console.log(debounceValue)
+        dispatch(setToSearch(debounceValue))
+    },[debounceValue])
   return (
-    <div className='w-full  '>
+    <div className='w-full relative'>
         {/* Header Top */}
         <div className='h-12 flex justify-between sm:flex-grow  bg-amazonblue-dark space-x-2 p-2 py-4 items-center'>
         {/* {Left side of Header} */}
@@ -31,7 +40,7 @@ const Header = () => {
             </div>
             {/* Header Center */}
             <div className='bg-yellow-400 my-2 sm:flex sm:flex-grow hidden items-center rounded-lg'>
-                <input className='flex-grow focus:outline-none focus:border-none px-2 rounded-l-lg' placeholder='Search..'/>
+                <input value={inputSearch} onChange={(e)=>setInputSearch(e.target.value)} className='flex-grow focus:outline-none focus:border-none px-2 rounded-l-lg' placeholder='Search..'/>
                 <FiSearch className='text-white ml-1 cursor-pointer'/>
             </div>
             {/* Header right */}
@@ -54,16 +63,29 @@ const Header = () => {
         </div>
         {/* Header Bottom */}
         <div className='h-6 flex bg-amazonblue-light items-center p-1 text-white space-x-2'>
-            <AiOutlineMenu/>
-            <div className='hidden sm:flex'>
+            <AiOutlineMenu onClick={()=>setIsOpen(!isOpen)}/>
+            <div className='hidden md:flex '>
                 {
-                data && data.map(category=>(
-                    <p onClick={()=>handleNavigate(category)} className='text-sm cursor-pointer' key={category}>{category.toUpperCase()}</p>
-                ))
+                !isOpen? data && data.map(category=>(
+                    <p onClick={()=>handleNavigate(category)} className='text-sm cursor-pointer px-6 hover:bg-amazonblue-dark transition' key={category}>{category.toUpperCase()}</p>
+                )): null
             }
             </div>
             
             
+        </div>
+        {/* Nav bar */}
+        <div className={`${isOpen?'inline-flex':'hidden'} absolute w-3/12 z-20 h-screen top-18 left-0  bg-amazonblue-dark flex flex-col transition duration-500` }>
+            <div className='flex justify-end pr-2 pt-2'>
+                <RxCross2  onClick={()=>setIsOpen(false)} className='text-white cursor-pointer h-6 w-6 mt-1 '/>
+            </div>
+            <div className='flex flex-col  text-gray-100 '>
+                {
+                data && data.map(category=>(
+                    <p  onClick={()=>handleNavigate(category)} className='text-sm cursor-pointer py-6  hover:bg-amazonblue-light transition ease-out' key={category}>{category.toUpperCase()}</p>
+                ))
+            }
+            </div>
         </div>
     </div>
     
