@@ -1,24 +1,31 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {ReactComponent as Logo} from '../../assets/amazon.svg';
 import {FiSearch} from 'react-icons/fi'
 import {AiOutlineShoppingCart} from 'react-icons/ai'
 import {AiOutlineMenu} from 'react-icons/ai'
 import { useGetCategoryQuery } from '../../features/dataApi'
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { quantitySelector } from '../../features/bucketSlice/bucketSelector';
 import { useNavigate } from 'react-router-dom';
 import { userSelector } from '../../features/user/userSelector';
-
+import { useDebounce } from '../../hooks/useDebounce/useDebounce';
+import { setToSearch } from '../../features/search/searchSlice';
 
 const Header = () => {
     const {data} = useGetCategoryQuery();
     const cartCount =useSelector(quantitySelector);
     const navigateTo=useNavigate();
     const user = useSelector(userSelector);
-
+    const [inputSearch,setInputSearch] = useState('');
+    const debounceValue = useDebounce(inputSearch,500);
+    const dispatch = useDispatch();
     const handleNavigate=(e)=>{        
         navigateTo(`/category/${e}`)
     }
+    useEffect(()=>{
+        console.log(debounceValue)
+        dispatch(setToSearch(debounceValue))
+    },[debounceValue])
   return (
     <div className='w-full  '>
         {/* Header Top */}
@@ -31,7 +38,7 @@ const Header = () => {
             </div>
             {/* Header Center */}
             <div className='bg-yellow-400 my-2 sm:flex sm:flex-grow hidden items-center rounded-lg'>
-                <input className='flex-grow focus:outline-none focus:border-none px-2 rounded-l-lg' placeholder='Search..'/>
+                <input value={inputSearch} onChange={(e)=>setInputSearch(e.target.value)} className='flex-grow focus:outline-none focus:border-none px-2 rounded-l-lg' placeholder='Search..'/>
                 <FiSearch className='text-white ml-1 cursor-pointer'/>
             </div>
             {/* Header right */}
